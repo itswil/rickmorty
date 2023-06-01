@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -31,12 +32,13 @@ fun CharacterListItem(
                 Column {
                     Row {
                         Text(
+                            color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
                             text = character.name
                         )
                     }
                     Row {
-                        Text(text = character.species)
+                        Text(color = MaterialTheme.colorScheme.secondary, text = character.species)
                     }
                 }
 

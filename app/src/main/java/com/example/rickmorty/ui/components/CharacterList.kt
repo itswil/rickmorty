@@ -2,9 +2,8 @@ package com.example.rickmorty.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,13 +27,12 @@ fun CharacterList(
     } else if (error != null && characters.isEmpty()) {
         Text(text = "Error: $error")
     } else {
-        LazyColumn(
-            contentPadding = PaddingValues(16.dp),
+        Column(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(characters.size) { item ->
+            characters.forEach { character ->
                 CharacterListItem(
-                    character = characters[item],
+                    character = character,
                 )
             }
         }
