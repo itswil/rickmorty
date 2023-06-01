@@ -1,4 +1,4 @@
-package com.example.rickmorty.ui
+package com.example.rickmorty.ui.character_list
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -16,12 +16,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.rickmorty.ui.character_list.CharacterListViewModel
-import com.example.rickmorty.ui.components.CharacterList
+import androidx.navigation.NavController
+import com.example.rickmorty.ui.character_list.components.CharacterList
 
 @Composable
 fun CharacterListScreen(
-//    navController: NavController,
+    navController: NavController,
     viewModel: CharacterListViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
@@ -43,16 +43,15 @@ fun CharacterListScreen(
                     color = MaterialTheme.colorScheme.secondary,
                     fontSize = 38.sp,
                     fontWeight = FontWeight.Black,
-                    text = "Hello there!"
+                    text = "Characters"
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
             CharacterList(
                 characters = state.characters,
-//        navController = navController,
+                navController = navController,
                 isLoading = state.isLoading,
                 error = state.error,
-//        onItemClick = onItemClick
             )
         }
     }

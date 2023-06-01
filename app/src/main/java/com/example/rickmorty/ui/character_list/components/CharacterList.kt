@@ -1,31 +1,26 @@
-package com.example.rickmorty.ui.components
+package com.example.rickmorty.ui.character_list.components
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.rickmorty.domain.model.Character
+import com.example.rickmorty.ui.Screen
+import com.example.rickmorty.ui.common.components.ErrorFullScreen
+import com.example.rickmorty.ui.common.components.LoadingFullScreen
 
 @Composable
 fun CharacterList(
     characters: List<Character>,
-//    navController: NavController,
+    navController: NavController,
     isLoading: Boolean,
     error: String?,
-//    onItemClick: (Int) -> Unit
 ) {
     if (isLoading && characters.isEmpty()) {
-        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-            CircularProgressIndicator()
-        }
+        LoadingFullScreen()
     } else if (error != null && characters.isEmpty()) {
-        Text(text = "Error: $error")
+        ErrorFullScreen(errorMessage = error)
     } else {
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -33,6 +28,9 @@ fun CharacterList(
             characters.forEach { character ->
                 CharacterListItem(
                     character = character,
+                    onItemClick = {
+                        navController.navigate(Screen.CharacterDetailScreen.route + "/${character.id}")
+                    }
                 )
             }
         }

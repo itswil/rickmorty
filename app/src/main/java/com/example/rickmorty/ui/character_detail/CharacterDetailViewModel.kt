@@ -22,12 +22,12 @@ class CharacterDetailViewModel @Inject constructor(
     val state: State<CharacterDetailState> = _state
 
     init {
-        savedStateHandle.get<Int>("characterId")?.let { id ->
+        savedStateHandle.get<String>("id")?.let { id ->
             getCharacterDetail(id)
         }
     }
 
-    private fun getCharacterDetail(id: Int) {
+    private fun getCharacterDetail(id: String) {
         getCharacterByIdUseCase(id).onEach { result ->
             when (result) {
                 is Resource.Success -> {

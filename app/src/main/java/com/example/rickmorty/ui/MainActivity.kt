@@ -12,6 +12,11 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.rickmorty.ui.character_detail.CharacterDetailScreen
+import com.example.rickmorty.ui.character_list.CharacterListScreen
 import com.example.rickmorty.ui.theme.RickMortyTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +35,22 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CharacterListScreen()
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.CharacterListScreen.route
+                    ) {
+                        composable(
+                            route = Screen.CharacterListScreen.route
+                        ) {
+                            CharacterListScreen(navController)
+                        }
+                        composable(
+                            route = Screen.CharacterDetailScreen.route + "/{id}"
+                        ) {
+                            CharacterDetailScreen()
+                        }
+                    }
                 }
             }
         }

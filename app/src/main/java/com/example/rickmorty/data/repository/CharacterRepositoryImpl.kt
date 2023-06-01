@@ -19,9 +19,9 @@ class CharacterRepositoryImpl(
         }.body()
     }
 
-    override suspend fun getCharacterById(id: Int): CharacterDetailDto {
+    override suspend fun getCharacterById(id: String): CharacterDetailDto {
         return client.get {
-            url(Endpoints.CHARACTER_BY_ID.replace("{id}", id.toString()))
+            url(Endpoints.CHARACTER_BY_ID.replace("{id}", id))
         }.body()
     }
 }

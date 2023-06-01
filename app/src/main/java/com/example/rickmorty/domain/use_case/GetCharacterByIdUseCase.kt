@@ -11,7 +11,7 @@ import javax.inject.Inject
 class GetCharacterByIdUseCase @Inject constructor(
     private val repository: CharacterRepository
 ) {
-    operator fun invoke(id: Int): Flow<Resource<CharacterDetail>> = flow {
+    operator fun invoke(id: String): Flow<Resource<CharacterDetail>> = flow {
         try {
             emit(Resource.Loading())
             val character = repository.getCharacterById(id).toCharacterDetail()

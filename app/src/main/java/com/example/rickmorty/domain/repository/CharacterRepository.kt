@@ -7,5 +7,5 @@ interface CharacterRepository {
 
     suspend fun getCharacters(): CharacterResponseDto
 
-    suspend fun getCharacterById(id: Int): CharacterDetailDto
+    suspend fun getCharacterById(id: String): CharacterDetailDto
 }

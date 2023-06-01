@@ -1,5 +1,6 @@
-package com.example.rickmorty.ui.components
+package com.example.rickmorty.ui.character_list.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,14 +17,17 @@ import com.example.rickmorty.domain.model.Character
 
 @Composable
 fun CharacterListItem(
-    character: Character
+    character: Character,
+    onItemClick: (id: Int) -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-//            .clickable { onItemClick(character.id) }
+            .clickable { onItemClick(character.id) }
     ) {
-        Card {
+        Card(
+            shape = MaterialTheme.shapes.large
+        ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
