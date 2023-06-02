@@ -1,7 +1,6 @@
 package com.example.rickmorty.domain.use_case
 
 import com.example.rickmorty.common.Resource
-import com.example.rickmorty.data.remote.dto.toCharacter
 import com.example.rickmorty.domain.model.Character
 import com.example.rickmorty.domain.repository.CharacterRepository
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +13,7 @@ class GetCharactersUseCase @Inject constructor(
     operator fun invoke(): Flow<Resource<List<Character>>> = flow {
         try {
             emit(Resource.Loading())
-            val characters = repository.getCharacters().results.map { it.toCharacter() }
+            val characters = repository.getCharacters()
             emit(Resource.Success(characters))
         } catch (e: Exception) {
             emit(Resource.Error(e.message ?: "An unexpected error occurred"))

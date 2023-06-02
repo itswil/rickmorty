@@ -1,11 +1,11 @@
 package com.example.rickmorty.domain.repository
 
-import com.example.rickmorty.data.remote.dto.CharacterDetailDto
-import com.example.rickmorty.data.remote.dto.CharacterResponseDto
+import com.example.rickmorty.domain.model.Character
+import com.example.rickmorty.domain.model.CharacterDetail
 
 interface CharacterRepository {
 
-    suspend fun getCharacters(): CharacterResponseDto
+    suspend fun getCharacters(): List<Character>
 
-    suspend fun getCharacterById(id: String): CharacterDetailDto
+    suspend fun getCharacterById(id: String): CharacterDetail
 }
