@@ -18,11 +18,17 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCharacterRepository(): CharacterRepository {
-        return CharacterRepositoryImpl(client = HttpClient(Android) {
+    fun provideHttpClient(): HttpClient {
+        return HttpClient(Android) {
             install(ContentNegotiation) {
                 gson()
             }
-        })
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharacterRepository(client: HttpClient): CharacterRepository {
+        return CharacterRepositoryImpl(client)
     }
 }
