@@ -11,8 +11,8 @@ import java.util.Locale
 fun Label(text: String) {
     Text(
         color = MaterialTheme.colorScheme.tertiary,
-        fontSize = 14.sp,
-        fontWeight = FontWeight.Black,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Medium,
         text = text.uppercase(Locale.getDefault()),
     )
 }

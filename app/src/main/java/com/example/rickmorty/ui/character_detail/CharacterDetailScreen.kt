@@ -15,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -58,13 +57,12 @@ fun CharacterDetailScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 48.dp),
+                    .padding(bottom = 32.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
                     color = MaterialTheme.colorScheme.secondary,
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontSize = 32.sp,
                     text = state.characterDetail.name
                 )
             }
@@ -76,23 +74,23 @@ fun CharacterDetailScreen(
                     modifier = Modifier.padding(24.dp)
                 ) {
                     Label(text = "Gender")
-                    Text(fontWeight = FontWeight.Medium, text = state.characterDetail.gender)
+                    Text(fontSize = 18.sp, text = state.characterDetail.gender)
                     Spacer(modifier = Modifier.padding(16.dp))
 
                     Label(text = "Species")
-                    Text(fontWeight = FontWeight.Medium, text = state.characterDetail.species)
+                    Text(fontSize = 18.sp, text = state.characterDetail.species)
                     Spacer(modifier = Modifier.padding(16.dp))
 
                     Label(text = "Origin")
-                    Text(fontWeight = FontWeight.Medium, text = state.characterDetail.origin.name)
+                    Text(fontSize = 18.sp, text = state.characterDetail.origin.name)
                     Spacer(modifier = Modifier.padding(16.dp))
 
                     Label(text = "Current location")
-                    Text(fontWeight = FontWeight.Medium, text = state.characterDetail.location.name)
+                    Text(fontSize = 18.sp, text = state.characterDetail.location.name)
                     Spacer(modifier = Modifier.padding(16.dp))
 
                     Label(text = "Status")
-                    Text(fontWeight = FontWeight.Medium, text = state.characterDetail.status)
+                    Text(fontSize = 18.sp, text = state.characterDetail.status)
                 }
             }
         }
