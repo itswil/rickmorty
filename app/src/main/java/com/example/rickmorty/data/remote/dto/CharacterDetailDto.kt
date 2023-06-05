@@ -13,7 +13,7 @@ data class CharacterDetailDto(
     val name: String,
     val origin: OriginDto,
     val species: String,
-    val status: String,
+    val status: Status,
     val type: String,
     val url: String
 )
