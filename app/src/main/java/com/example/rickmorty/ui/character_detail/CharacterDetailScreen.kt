@@ -5,11 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -37,23 +35,17 @@ fun CharacterDetailScreen(
     } else if (state.error.isNotBlank()) {
         ErrorFullScreen(errorMessage = state.error)
     } else if (state.characterDetail != null) {
-        val heightStatusBar = WindowInsets.systemBars.asPaddingValues().calculateTopPadding()
-        val heightNavigationBar =
-            WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()
         Column(
-            modifier = Modifier.padding(
-                PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp,
-                    bottom = heightNavigationBar + 0.dp,
-                    top = heightStatusBar + 16.dp
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    PaddingValues(16.dp)
                 )
-            )
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 32.dp, top = 16.dp),
+                    .padding(bottom = 32.dp, top = 64.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
                 AsyncImage(

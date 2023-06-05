@@ -3,17 +3,23 @@ package com.example.rickmorty.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.rickmorty.ui.character_detail.CharacterDetailScreen
 import com.example.rickmorty.ui.character_list.CharacterListScreen
@@ -21,6 +27,7 @@ import com.example.rickmorty.ui.theme.RickMortyTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
+@OptIn(ExperimentalMaterial3Api::class)
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,27 +38,53 @@ class MainActivity : ComponentActivity() {
         setContent {
             RickMortyTheme {
                 TransparentSystemBars()
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val navController = rememberNavController()
-                    NavHost(
-                        navController = navController,
-                        startDestination = Screen.CharacterListScreen.route
-                    ) {
-                        composable(
-                            route = Screen.CharacterListScreen.route
+
+                val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val selectedDestination =
+                    navBackStackEntry?.destination?.route ?: Screen.CharacterListScreen.route
+
+                Scaffold(
+                    topBar = {
+                        AnimatedVisibility(
+                            enter = slideInVertically(
+                                initialOffsetY = { -it }
+                            ),
+                            exit = slideOutVertically(
+                                targetOffsetY = { -it }
+                            ),
+                            visible = TOP_LEVEL_DESTINATIONS.any { it.route == selectedDestination }
                         ) {
-                            CharacterListScreen(navController)
+                            RMTopAppBar()
                         }
-                        composable(
-                            route = Screen.CharacterDetailScreen.route + "/{id}"
+                    },
+                    content = { contentPadding ->
+                        NavHost(
+                            navController = navController,
+                            startDestination = Screen.CharacterListScreen.route,
                         ) {
-                            CharacterDetailScreen()
+                            composable(Screen.CharacterListScreen.route) {
+                                Box(modifier = Modifier.padding(contentPadding)) {
+                                    CharacterListScreen(navController)
+                                }
+                            }
+                            composable(Screen.CharacterDetailScreen.route + "/{id}") {
+                                CharacterDetailScreen()
+                            }
                         }
+                    },
+                    bottomBar = {
+                        AnimatedVisibility(
+                            enter = slideInVertically(
+                                initialOffsetY = { it }
+                            ),
+                            exit = slideOutVertically(
+                                targetOffsetY = { it }
+                            ),
+                            visible = TOP_LEVEL_DESTINATIONS.any { it.route == selectedDestination }
+                        ) { RMNavigationBar(selectedDestination) }
                     }
-                }
+                )
             }
         }
     }
