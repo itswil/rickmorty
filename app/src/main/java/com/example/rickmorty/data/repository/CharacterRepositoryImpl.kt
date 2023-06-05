@@ -1,8 +1,10 @@
 package com.example.rickmorty.data.repository
 
 import com.example.rickmorty.common.Endpoints
+import com.example.rickmorty.data.remote.dto.CharacterDetailDto
 import com.example.rickmorty.data.remote.dto.CharacterResponseDto
 import com.example.rickmorty.data.remote.dto.toCharacter
+import com.example.rickmorty.data.remote.dto.toCharacterDetail
 import com.example.rickmorty.domain.model.Character
 import com.example.rickmorty.domain.model.CharacterDetail
 import com.example.rickmorty.domain.repository.CharacterRepository
@@ -23,8 +25,9 @@ class CharacterRepositoryImpl(
     }
 
     override suspend fun getCharacterById(id: String): CharacterDetail {
-        return client.get {
+        val response: CharacterDetailDto = client.get {
             url(Endpoints.CHARACTER_BY_ID.replace("{id}", id))
         }.body()
+        return response.toCharacterDetail()
     }
 }

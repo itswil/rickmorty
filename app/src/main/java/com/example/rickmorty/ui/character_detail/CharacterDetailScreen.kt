@@ -50,7 +50,7 @@ fun CharacterDetailScreen(
             ) {
                 AsyncImage(
                     model = state.characterDetail.image,
-                    contentDescription = "Picture of ${state.characterDetail.name}",
+                    contentDescription = state.characterDetail.name,
                     modifier = Modifier.clip(CircleShape)
                 )
             }

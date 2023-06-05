@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
@@ -33,7 +34,9 @@ val TOP_LEVEL_DESTINATIONS = listOf(
 
 @Composable
 fun RMNavigationBar(selectedDestination: String) {
-    NavigationBar {
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.background,
+    ) {
         TOP_LEVEL_DESTINATIONS.forEach { destination ->
             NavigationBarItem(
                 icon = {

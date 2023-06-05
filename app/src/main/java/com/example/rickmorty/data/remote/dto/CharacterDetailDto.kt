@@ -22,7 +22,7 @@ fun CharacterDetailDto.toCharacter(): Character {
     return Character(
         id,
         name,
-        species,
+        image,
     )
 }
 

@@ -15,8 +15,7 @@ fun RMTopAppBar() {
     TopAppBar(
         title = { Text(text = stringResource(id = R.string.app_name)) },
         colors = TopAppBarDefaults.smallTopAppBarColors(
-            titleContentColor = MaterialTheme.colorScheme.secondary,
-            scrolledContainerColor = MaterialTheme.colorScheme.primary,
+            titleContentColor = MaterialTheme.colorScheme.primary,
         ),
         scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(),
     )
