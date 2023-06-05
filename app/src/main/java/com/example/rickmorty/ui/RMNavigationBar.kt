@@ -1,8 +1,8 @@
 package com.example.rickmorty.ui
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Place
+import androidx.compose.material.icons.rounded.Face
+import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -22,12 +22,12 @@ data class TopLevelDestination(
 val TOP_LEVEL_DESTINATIONS = listOf(
     TopLevelDestination(
         route = Screen.CharacterListScreen.route,
-        selectedIcon = Icons.Default.Person,
+        selectedIcon = Icons.Rounded.Face,
         iconTextId = R.string.navigation_item_characters
     ),
     TopLevelDestination(
         route = Screen.LocationListScreen.route,
-        selectedIcon = Icons.Default.Place,
+        selectedIcon = Icons.Rounded.Map,
         iconTextId = R.string.navigation_item_locations
     ),
 )
