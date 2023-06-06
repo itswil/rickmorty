@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -83,6 +84,7 @@ fun CharacterDetailScreen(
                         fontSize = 32.sp,
                         lineHeight = 40.sp,
                         text = characterDetail.name,
+                        textAlign = TextAlign.Center,
                     )
                 }
                 Row(
@@ -99,6 +101,7 @@ fun CharacterDetailScreen(
                         tint = MaterialTheme.colorScheme.secondary,
                     )
                     Text(
+                        color = MaterialTheme.colorScheme.secondary,
                         fontSize = 16.sp,
                         text = characterDetail.location.name,
                     )
